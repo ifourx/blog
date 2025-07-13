@@ -1,5 +1,5 @@
-# rust
+![Rust](/rust.svg)
 
-## 这是 index 文件
+## Rust
 
-不显示在左侧
+### "Fearless Concurrency"

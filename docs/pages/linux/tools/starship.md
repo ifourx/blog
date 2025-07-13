@@ -25,7 +25,9 @@ add_newline = true
 
 # 将提示符中的 '❯' 替换为 '➜'
 [character] # 此组件名称为 'character'
-success_symbol = '[➜](bold green)' # 将 'success_symbol' 字段设置成颜色为 'bold green' 的 '➜'
+
+# 将 'success_symbol' 字段设置成颜色为 'bold green' 的 '➜'
+success_symbol = '[➜](bold green)'
 error_symbol = '[✗](bold red)'
 vimcmd_symbol = '[V](bold green)'
 

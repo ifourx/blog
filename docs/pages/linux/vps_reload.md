@@ -1,4 +1,4 @@
-# vps reload
+# vps 安全指北
 
 vps 安全指北,以重装的 ubuntu 为例
 
@@ -8,7 +8,8 @@ vps 安全指北,以重装的 ubuntu 为例
 # root用户执行
 apt update && apt upgrade && apt autoremove
 
-# 变更ssh端口 vim /etc/ssh/sshd_config 或者 /etc/ssh/sshd_config.d/50-cloud-init.conf
+# 变更ssh端口 vim /etc/ssh/sshd_config
+# 或者 /etc/ssh/sshd_config.d/50-cloud-init.conf
 Port 998
 
 systemctl disable ssh.socket
@@ -34,7 +35,8 @@ adduser ifox
 update-alternatives --config editor
 
 # 设置用户ifox免密使用sudo命令.
-# 特别注意：可以使用visudo命令追加到文件中的最后一行。因为变量读取是从上往下，避免被sudo组的权限覆盖。
+# 特别注意：可以使用visudo命令追加到文件中的最后一行。
+# 因为变量读取是从上往下，避免被sudo组的权限覆盖。
 visudo
 # ifox	ALL=(ALL:ALL) NOPASSWD:ALL
 ```
@@ -52,11 +54,18 @@ ssh -i ${fox_ed25519} -p ${PORT} ${USERNAME}@${IP_address}
 
 ## 设置只允许使用密钥来登录并禁止 root 用户登录
 
-编辑配置文件 `vim /etc/ssh/sshd_config` 或者 `vim /etc/ssh/sshd_config.d/50-cloud-init.conf`
+编辑配置文件 `vim /etc/ssh/sshd_config`
+
+或者 `vim /etc/ssh/sshd_config.d/50-cloud-init.conf`
 
 ```sh
-PasswordAuthentication no # 禁止密码验证登录。如果启用(yes)的话,RSA认证登录就没有意义了，需要取消注释修改为 no
-PermitRootLogin no # 禁用root账户登录，非必要;这里只是禁止root用户登录,vps上还是可以使用root用户执行命令
+# 禁止密码验证登录。
+# 如果启用(yes)的话,RSA认证登录就没有意义了，需要取消注释修改为 no
+PasswordAuthentication no
+
+# 禁用root账户登录，非必要;
+# 这里只是禁止root用户登录,vps上还是可以使用root用户执行命令
+PermitRootLogin no
 ```
 
 重新加载配置 `systemctl reload ssh`
@@ -71,17 +80,20 @@ ps: # 如果哪天你本地的密钥丢了或重置了，那只能进入 vps 官
 ```sh
 # 查看当前可用的 TCP 拥塞控制算法
 sysctl net.ipv4.tcp_available_congestion_control
+
 # 查看当前 TCP 使用的算法
 sysctl net.ipv4.tcp_congestion_control
+
 # 查看是否已加载 BBR 模块
 lsmod | grep bbr
 ```
 
-永久开启 BBR
+### 永久开启 BBR
 
 ```sh
 # 切换到root用户执行
-wget --no-check-certificate -O /opt/bbr.sh https://github.com/teddysun/across/raw/master/bbr.sh
+wget --no-check-certificate \
+-O /opt/bbr.sh https://github.com/teddysun/across/raw/master/bbr.sh
 
 chmod 755 /opt/bbr.sh
 
@@ -108,20 +120,27 @@ timedatectl set-timezone Asia/Shanghai
 查看 vps 防火墙全部规则以 `iptables --list` 为准
 
 ```sh
-# apt update && apt install ufw
+# apt update && apt install ufw && apt autoremove
 ufw status
-ufw enable # WARNING: 开启后默认关了所有端口
+ufw enable # WARNING: 开启后默认关了所有端口 [!code error]
 
-# 先查看vps那些端口在LISTEN,用的是什么协议tcp/udp,然后开放它(例如 22)
+# 先查看vps哪些端口在LISTEN,用的是什么协议tcp/udp,然后开放它(例如 22)
 ss -ntulp
-ufw allow 22/tcp  # 开放ssh端口，默认的是22
-ufw allow 2290:2300/tcp # 端口范围内只允许tcp协议使用
-ufw allow 2290:2300/udp # 端口范围内只允许udp协议使用
+# 开放ssh端口，默认的是22
+ufw allow 22/tcp
+# 端口范围内只允许tcp协议使用
+ufw allow 2290:2300/tcp
+# 端口范围内只允许udp协议使用
+ufw allow 2290:2300/udp
 
-ufw allow from 192.168.0.104 # 基于IP地址的规则,我比较中意这个。 允许自已指定的IP访问vps上的所有服务(端口)
-ufw allow form 192.168.0.0/24 # 也可以使用子网掩码来扩宽范围
-ufw allow from 192.168.0.104 to any port 998 # 来自 192.168.0.104 的 IP 只能访问998端口
-ufw allow from 192.168.0.104 proto tcp to any port 22 # 限制来自 192.168.0.104 的 IP 只能使用 tcp 协议和通过 22端口 来访问
+# 基于IP地址的规则,我比较中意这个。 允许自已指定的IP访问vps上的所有服务(端口)
+ufw allow from 192.168.0.104
+# 也可以使用子网掩码来扩宽范围
+ufw allow form 192.168.0.0/24
+# 来自 192.168.0.104 的 IP 只能访问998端口
+ufw allow from 192.168.0.104 to any port 998
+# 限制来自 192.168.0.104 的 IP 只能使用 tcp 协议和通过 22端口 来访问
+ufw allow from 192.168.0.104 proto tcp to any port 22
 
 # nmap检查本地正在监听的端口
 nmap -p- 127.0.0.1
@@ -144,10 +163,6 @@ ufw disable
 
 ```
 
-### zsh + starship
-
-<!-- [zsh+starship](./zsh/README.md) -->
-
 ## 部署 docker
 
 官方文档: [Install Docker Engine on Ubuntu](https://docs.docker.com/engine/install/ubuntu/)
@@ -157,7 +172,7 @@ ufw disable
 
 ## Misc.
 
-vps 评测脚本
+### vps 评测脚本
 
 ```sh
 # from 秋水逸冰:https://github.com/teddysun/across/blob/master/bench.sh
@@ -169,14 +184,14 @@ wget -qO- yabs.sh | bash
 curl -sL https://yabs.sh | bash
 ```
 
-使用 `vim` 时显示行号
+### 使用 `vim` 时显示行号
 
 ```sh
 # vim ~/.vimrc
 set nu
 ```
 
-`who` 或 `w` 查看当前登陆的用户
+### `who` 或 `w` 查看当前登陆的用户
 
 ```sh
 # 检查日志和登陆记录

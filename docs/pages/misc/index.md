@@ -1,3 +1,5 @@
+![Misc](/misc.svg)
+
 ## Misc
 
-### test title
+### "Miscellaneous"

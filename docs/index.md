@@ -20,7 +20,7 @@ hero:
 features:
   - title: Linux
     icon:
-      src: /linux-color.svg
+      src: /linux.svg
       width: 40
       height: 40
     # details: Meet the minimum requirements for the business to call project a success.
@@ -28,7 +28,7 @@ features:
     # linkText: Go to /pages/linux/
   - title: Rust
     icon:
-      src: /rust-color.svg
+      src: /rust.svg
       width: 40
       height: 40
     # details: refactor it to make it clean and correct.
@@ -36,38 +36,40 @@ features:
     # linkText: Visit /pages/rust/
   - title: Golang
     icon:
-      src: /go-color.svg
+      src: /golang.svg
       width: 40
       height: 40
     # details: Find and eliminate waste in the process.
     link: /pages/golang/
     # linkText: Visit /pages/golang/
   - icon:
-      src: /python-color.svg
+      src: /python.svg
       width: 40
       height: 40
     # details: Find and eliminate waste in the process.
     link: /pages/python/
     # linkText: Visit /pages/python/
     title: Python
+  - title: Misc.
+    icon:
+      src: /misc.svg
+      width: 40
+      height: 40
+    # details: refactor it to make it clean and correct.
+    link: /pages/misc/
+    # linkText: Visit /pages/misc/
 ---
 
 ## Latest Blog Posts
 
 - [[Linux] VPS 安全指北](/pages/linux/vps_reload)
-- [[Golang] defer 执行顺序](/pages/golang/defer)
-<!-- - [[Misc] ChatGPT API 的高级用法](/tech/chatgpt-api) -->
+- [[Linux] H-UI 面板](/pages/linux/hui)
 
-## Github Stats
+## GitHub Data
 
-<div style="display: flex; gap: 10px;">
-<img src="https://streak-stats.demolab.com/?user=ifourx&theme=buefy" alt="GitHub Streak" style=" height: 200px; "/>
-      
-<img src="https://github-readme-stats.vercel.app/api?username=ifourx&show_icons=true&theme=buefy&count_private=true" alt="GitHub Stats" style=" height: 200px; " />
+![Github Streak](https://streak-stats.demolab.com/?user=ifourx&theme=buefy)
 
-</div>
-
-## Tech Stack
+![Github Stats](https://github-readme-stats.vercel.app/api?username=ifourx&show_icons=true&theme=buefy&count_private=true)
 
 ![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=flygar&hide=javascript,html&layout=compact)
 
