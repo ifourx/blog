@@ -40,10 +40,16 @@ function sidebarMisc(): DefaultTheme.SidebarItem[] {
   return [
     {
       text: 'Examples',
+      collapsed: false,
       items: [
         { text: 'Markdown Examples', link: '/pages/misc/markdown-examples' },
         { text: 'Runtime API Examples', link: '/pages/misc/api-examples' }
       ]
+    },
+    {
+      text: 'Tips',
+      collapsed: false,
+      items: [{ text: 'Did You Know', link: '/pages/misc/tips/did_you_know' }]
     }
   ]
 }
@@ -71,7 +77,8 @@ function sidebarLinux(): DefaultTheme.SidebarItem[] {
       collapsed: false,
       items: [
         { text: 'oh-my-zsh', link: '/pages/linux/tools/ohmyzsh' },
-        { text: 'starship', link: '/pages/linux/tools/starship' }
+        { text: 'starship', link: '/pages/linux/tools/starship' },
+        { text: 'shortkeys', link: '/pages/linux/tools/shortkeys' }
       ]
     }
   ]
@@ -80,7 +87,7 @@ function sidebarRust(): DefaultTheme.SidebarItem[] {
   return [
     {
       text: 'Rust',
-      items: [{ text: 'rust1', link: '/pages/rust/rust1' }]
+      items: [{ text: 'note', link: '/pages/rust/note' }]
     }
   ]
 }

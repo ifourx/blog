@@ -79,7 +79,7 @@ features:
 
 ![Github Stats](https://github-readme-stats.vercel.app/api?username=ifourx&show_icons=true&theme=buefy&count_private=true)
 
-![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=flygar&hide=javascript,html&layout=compact)
+![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=ifourx&hide=javascript,html&layout=compact)
 
 ## About Me
 
