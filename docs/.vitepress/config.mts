@@ -92,7 +92,8 @@ export default defineConfig({
   lastUpdated: true,
   // 关闭深色模式
   appearance: false,
-  base: '/blog/',
+  // 1. 使用自定义仓库名才需要配置,但如果还设置了自定义域名那也不需要配置
+  // base: '/blog/',
   title: "Flygar's Blog",
   description: 'A flash in the pan.',
   head: [['link', { rel: 'icon', href: '/blog/favicon.ico' }]],
