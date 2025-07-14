@@ -1,55 +1,24 @@
-/* Inter 正文字体 */
+/* 正文字体 */
 @font-face {
-  font-family: 'Inter';
-  src: url('/fonts/Inter-Regular.woff2') format('woff2');
+  font-family: 'Roboto Variable';
+  src: url('/fonts/Roboto-VariableFont_wdth,wght.woff2') format('woff2-variations');
+  font-weight: 100 700;
+  font-style: normal italic;
+  font-display: swap;
+}
+
+/* 代码字体 */
+
+@font-face {
+  font-family: 'RobotoMonoNerdFont Regular';
+  src: url('/fonts/RobotoMonoNerdFont-Regular.woff2') format('woff2-variations');
   font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Inter';
-  src: url('/fonts/Inter-Medium.woff2') format('woff2');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Inter';
-  src: url('/fonts/Inter-SemiBold.woff2') format('woff2');
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Inter';
-  src: url('/fonts/Inter-Bold.woff2') format('woff2');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-/* JetBrainsMono Nerd Font 等宽代码字体 */
-@font-face {
-  font-family: 'JetBrainsMono Nerd Font';
-  src: url('/fonts/JetBrainsMonoNerdFont-Regular.woff2') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'JetBrainsMono Nerd Font';
-  src: url('/fonts/JetBrainsMonoNerdFont-Bold.woff2') format('woff2');
-  font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 
 /* 全局字体 */
 :root {
-  --vp-font-family-base: 'Inter', sans-serif;
-  --vp-font-family-mono: 'JetBrainsMono Nerd Font', monospace;
+  --vp-font-family-base: 'Roboto Variable', sans-serif;
+  --vp-font-family-mono: 'RobotoMonoNerdFont Regular', monospace;
 }

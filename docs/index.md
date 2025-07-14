@@ -58,6 +58,14 @@ features:
     # details: refactor it to make it clean and correct.
     link: /pages/misc/
     # linkText: Visit /pages/misc/
+  - title: Docker
+    icon:
+      src: /docker.svg
+      width: 40
+      height: 40
+    # details: refactor it to make it clean and correct.
+    link: /pages/docker/
+    # linkText: Visit /pages/docker/
 ---
 
 ## Latest Blog Posts

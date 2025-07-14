@@ -12,7 +12,12 @@ function nav(): DefaultTheme.NavItem[] {
       text: 'Pages',
       activeMatch: '/pages/',
       items: [
-        { items: [{ text: 'Linux', link: '/pages/linux/' }] },
+        {
+          items: [
+            { text: 'Linux', link: '/pages/linux/' },
+            { text: 'Docker', link: '/pages/docker/' }
+          ]
+        },
         {
           items: [
             { text: 'Rust', link: '/pages/rust/' },
@@ -39,6 +44,14 @@ function sidebarMisc(): DefaultTheme.SidebarItem[] {
         { text: 'Markdown Examples', link: '/pages/misc/markdown-examples' },
         { text: 'Runtime API Examples', link: '/pages/misc/api-examples' }
       ]
+    }
+  ]
+}
+function sidebarDocker(): DefaultTheme.SidebarItem[] {
+  return [
+    {
+      text: 'Docker',
+      items: [{ text: 'Pass', link: '/pages/docker/pass' }]
     }
   ]
 }
@@ -74,7 +87,7 @@ function sidebarRust(): DefaultTheme.SidebarItem[] {
 function sidebarPython(): DefaultTheme.SidebarItem[] {
   return [
     {
-      text: 'python',
+      text: 'Python',
       items: [{ text: 'test1', link: '/pages/python/test1' }]
     }
   ]
@@ -82,7 +95,7 @@ function sidebarPython(): DefaultTheme.SidebarItem[] {
 function sidebarGolang(): DefaultTheme.SidebarItem[] {
   return [
     {
-      text: 'golang',
+      text: 'Golang',
       items: [{ text: 'defer', link: '/pages/golang/defer' }]
     }
   ]
@@ -105,6 +118,7 @@ export default defineConfig({
 
     sidebar: {
       '/pages/linux/': sidebarLinux(),
+      '/pages/docker/': sidebarDocker(),
 
       '/pages/rust/': sidebarRust(),
       '/pages/golang/': sidebarGolang(),
