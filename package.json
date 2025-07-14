@@ -4,7 +4,7 @@
   },
   "scripts": {
     "docs:dev": "vitepress dev docs --port 5174",
-    "docs:build": "vitepress build docs && echo flygar.org > docs/.vitepress/dist/CNAME",
+    "docs:build": "vitepress build docs && echo blog.flygar.org > docs/.vitepress/dist/CNAME",
     "docs:preview": "vitepress preview docs --port 5174"
   }
 }
