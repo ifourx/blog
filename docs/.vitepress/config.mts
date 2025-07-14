@@ -96,7 +96,7 @@ export default defineConfig({
   // base: '/blog/',
   title: "Flygar's Blog",
   description: 'A flash in the pan.',
-  head: [['link', { rel: 'icon', href: '/blog/favicon.ico' }]],
+  head: [['link', { rel: 'icon', href: '/favicon.ico' }]],
   themeConfig: {
     search: {
       provider: 'local'
