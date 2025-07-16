@@ -92,8 +92,8 @@ function sidebarRust(): DefaultTheme.SidebarItem[] {
     {
       text: 'Rust',
       items: [
-        { text: 'note', link: '/pages/rust/note' },
-        { text: 'note', link: '/pages/rust/ownership' }
+        { text: 'cargo', link: '/pages/rust/cargo' },
+        { text: 'ownership', link: '/pages/rust/ownership' }
       ]
     }
   ]
