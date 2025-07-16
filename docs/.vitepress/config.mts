@@ -69,7 +69,10 @@ function sidebarLinux(): DefaultTheme.SidebarItem[] {
       collapsed: false,
       items: [
         { text: 'VPS 安全指北', link: '/pages/linux/vps_reload' },
-        { text: 'H-UI 面板', link: '/pages/linux/hui' }
+        { text: 'H-UI 面板', link: '/pages/linux/hui' },
+        { text: 'Git', link: '/pages/linux/git' },
+        { text: 'How To', link: '/pages/linux/how_to' },
+        { text: 'ssh', link: '/pages/linux/ssh' }
       ]
     },
     {
@@ -78,7 +81,8 @@ function sidebarLinux(): DefaultTheme.SidebarItem[] {
       items: [
         { text: 'oh-my-zsh', link: '/pages/linux/tools/ohmyzsh' },
         { text: 'starship', link: '/pages/linux/tools/starship' },
-        { text: 'shortkeys', link: '/pages/linux/tools/shortkeys' }
+        { text: 'shortkeys', link: '/pages/linux/tools/shortkeys' },
+        { text: 'tmux', link: '/pages/linux/tools/tmux' }
       ]
     }
   ]
