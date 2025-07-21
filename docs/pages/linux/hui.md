@@ -25,6 +25,13 @@ docker run -d --cap-add=NET_ADMIN \
   ./h-ui -p 8081
 ```
 
+### 开放防火墙端口
+
+```sh
+sudo ufw allow 8081/tcp
+sudo ufw allow "Nginx Full"
+```
+
 ### docker uninstall
 
 ```sh
@@ -80,6 +87,9 @@ server {
 ```sh
 # 软链
 sudo ln -s /etc/nginx/sites-available/${example.com} /etc/nginx/sites-enabled/
+
+# 生成 `options-ssl-nginx.conf` 文件
+# sudo curl -o /etc/letsencrypt/options-ssl-nginx.conf https://raw.githubusercontent.com/certbot/certbot/master/certbot-nginx/certbot_nginx/_internal/tls_configs/options-ssl-nginx.conf
 
 # reload
 sudo nginx -t

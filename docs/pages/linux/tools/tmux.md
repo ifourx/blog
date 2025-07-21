@@ -35,7 +35,7 @@ tmux kill-server
 配置文件
 `~/.tmux.conf`
 
-```
+```ini
 # xterm-256color
 set -g default-terminal "xterm-256color"
 
@@ -44,6 +44,11 @@ set -g base-index 1
 
 # pane 编号从 1 开始
 set -g pane-base-index 1
+
+# 鼠标模式
+set -g mouse on
+# 鼠标滚动历史缓冲区设置为1000行(考虑内存)
+set -g history-limit 1000
 ```
 
 ## 常用快捷键

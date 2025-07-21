@@ -74,3 +74,20 @@ ssh -T githubifourx
 ```sh
 ssh osaka-500
 ```
+
+### OpenSSL
+
+加密
+
+```sh
+openssl enc -aes-256-cbc -pbkdf2 -iter 100000 -salt \
+  -in flygar_ed25519 \
+  -out flygar_ed25519.enc
+```
+
+解密
+
+```sh
+openssl enc -d -aes-256-cbc -pbkdf2 -iter 100000 \
+  -in flygar_ed25519.enc -out flygar_ed25519
+```

@@ -66,6 +66,9 @@ PasswordAuthentication no
 # 禁用root账户登录，非必要;
 # 这里只是禁止root用户登录,vps上还是可以使用root用户执行命令
 PermitRootLogin no
+
+# 服务器每 60 秒发一次心跳(保活)
+ClientAliveInterval 60
 ```
 
 重新加载配置 `systemctl reload ssh`
