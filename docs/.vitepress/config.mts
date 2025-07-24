@@ -97,7 +97,8 @@ function sidebarRust(): DefaultTheme.SidebarItem[] {
         { text: '集合', link: '/pages/rust/collections' },
         { text: '错误处理', link: '/pages/rust/error' },
         { text: '生命周期', link: '/pages/rust/lifetime' },
-        { text: '特征', link: '/pages/rust/trait' }
+        { text: '特征', link: '/pages/rust/trait' },
+        { text: '闭包和迭代器', link: '/pages/rust/closures_Iterators' }
       ]
     }
   ]
