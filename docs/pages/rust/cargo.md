@@ -41,6 +41,17 @@ cargo doc —open
 cargo yank
 ```
 
+### `cargo.toml`
+
+当出现 panic 时, 程序默认会开始**展开**(unwinding),
+**终止**(abort): 不清理数据直接退出程序, 所使用的内存由操作系统清理.
+设置在 release 模式中 panic 时直接种植:
+
+```toml
+[profile.release]
+panic = 'abort'
+```
+
 ## tools
 
 安装 nightly 版本 rust
@@ -50,7 +61,7 @@ rustup toolchain list
 rustup toolchain install nightly
 ```
 
-## 预导入
+## 预导入 prelude
 
 rust 的默认行为，Rust 会自动将标准库中一系列常用的条目导入每个程序中(默认导入一些常用包)，不在预导入模块中就需要用 use 显式导入
 

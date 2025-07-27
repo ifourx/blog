@@ -98,7 +98,10 @@ function sidebarRust(): DefaultTheme.SidebarItem[] {
         { text: '错误处理', link: '/pages/rust/error' },
         { text: '生命周期', link: '/pages/rust/lifetime' },
         { text: '特征', link: '/pages/rust/trait' },
-        { text: '闭包和迭代器', link: '/pages/rust/closures_Iterators' }
+        { text: '闭包和迭代器', link: '/pages/rust/closures_Iterators' },
+        { text: '智能指针', link: '/pages/rust/smart_pointer' },
+        { text: '无畏并发', link: '/pages/rust/fearless_concurrency' },
+        { text: '模式与匹配', link: '/pages/rust/match' }
       ]
     }
   ]
