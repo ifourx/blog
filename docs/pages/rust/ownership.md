@@ -81,11 +81,35 @@ println!("{s}, world!");
 
 带来的好处: rust 拒绝编译存在数据竞争的代码来避免数据竞争带来的问题
 
+### NLL 非词法生命周期
+
+版本 `Rust 2015 edition` 使用的是`词法作用域驱动`, 生命周期严格绑定变量作用域(持续整个作用域);
+
+版本 `Rust 2018 edition` 之后默认启用的特性: `Non-Lexical Lifetimes（NLL，非词法生命周期）`
+
+作用: 改进了借用检查器, 精细的分析`引用`的实际使用范围(而不是词法块), 生命周期只会持续到`"最后一次使用"`的位置,而不是整个词法作用域
+
+以下代码正常通过编译, 如果没有 NLL, 代码会因为借用冲突无法编译. 有了 NLL, 有效减少了编译报错: "同时存在可变,不可变借用"
+
+```rs
+fn main() {
+    let mut s = String::from("hello");
+
+    let r1 = &s; // no problem
+    let r2 = &s; // no problem
+
+    // NLL的启用使得在r3创建前 r1,r2 drop; 之后无法再使用已经drop的变量: r1, r2
+    let r3 = &mut s; // no problem
+    println!("{r3}");
+}
+```
+
 ```rust
 let mut s = String::from("hello");
 
 let r1 = &s; // no problem
 let r2 = &s; // no problem
+// 显式的使用一次r1,r2;Rust 的 NLL（Non-lexical lifetimes）可以追踪到 变量“最后一次使用”之后生命周期结束，但不会在你没使用的情况下就自动提前结束。
 println!("{r1} and {r2}"); // 这行如果被注释,将不能通过编译.rust不允许发生这种情况:(不可变引用的用户r1,r2的值在某一时刻突然发生变化)
 // Variables r1 and r2 will not be used after this point.
 

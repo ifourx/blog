@@ -101,7 +101,8 @@ function sidebarRust(): DefaultTheme.SidebarItem[] {
         { text: '闭包和迭代器', link: '/pages/rust/closures_Iterators' },
         { text: '智能指针', link: '/pages/rust/smart_pointer' },
         { text: '无畏并发', link: '/pages/rust/fearless_concurrency' },
-        { text: '模式与匹配', link: '/pages/rust/match' }
+        { text: '模式与匹配', link: '/pages/rust/match' },
+        { text: '枚举与结构体', link: '/pages/rust/struct_enum' }
       ]
     }
   ]
