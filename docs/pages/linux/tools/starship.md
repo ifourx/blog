@@ -15,7 +15,7 @@ eval "$(starship init zsh)"
 写入配置文件: `mkdir -p ~/.config && touch ~/.config/starship.toml`
 
 ```toml
-# 根据 schema 提供自动补全
+# 根据 schema 提供自动补全: 在vscode中编辑starship.toml时会自动提示补全?
 "$schema" = 'https://starship.rs/config-schema.json'
 
 # 在提示符之间插入空行

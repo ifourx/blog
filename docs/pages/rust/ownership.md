@@ -104,20 +104,6 @@ fn main() {
 }
 ```
 
-```rust
-let mut s = String::from("hello");
-
-let r1 = &s; // no problem
-let r2 = &s; // no problem
-// 显式的使用一次r1,r2;Rust 的 NLL（Non-lexical lifetimes）可以追踪到 变量“最后一次使用”之后生命周期结束，但不会在你没使用的情况下就自动提前结束。
-println!("{r1} and {r2}"); // 这行如果被注释,将不能通过编译.rust不允许发生这种情况:(不可变引用的用户r1,r2的值在某一时刻突然发生变化)
-// Variables r1 and r2 will not be used after this point.
-
-let r3 = &mut s; // no problem
-println!("{r3}");
-
-```
-
 ## 切片类型
 
 让你引用一个 集合 中连续的元素序列。切片是一种引用，因此它没有所有权。
