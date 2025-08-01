@@ -1,17 +1,33 @@
-# 根据 schema 提供自动补全
+# starship
 
+探索[Starship 文档](https://starship.rs/zh-CN/guide/)来安装
+
+```sh
+# 检查字体是否能正常显示. 这个字体是通过本地terminal显示给你看的,并不需要去vps上安装
+echo "\uf303 \uf4fc \ue0a0 \ue0b0"
+
+# 记得 vim ~/.zshrc 文件末尾添加
+eval "$(starship init zsh)"
+```
+
+## config
+
+写入配置文件: `mkdir -p ~/.config && touch ~/.config/starship.toml`
+
+```toml
+# 根据 schema 提供自动补全
 "$schema" = 'https://starship.rs/config-schema.json'
 
 # 在提示符之间插入空行
-
 add_newline = true
 
 # format = '$all${line_break}$cmd_duration$character'
 
 # 将提示符中的 '❯' 替换为 '➜'
-
 [character] # 此组件名称为 'character'
-success_symbol = '[➜](bold green)' # 将 'success_symbol' 字段设置成颜色为 'bold green' 的 '➜'  
+
+# 将 'success_symbol' 字段设置成颜色为 'bold green' 的 '➜'
+success_symbol = '[➜](bold green)'
 error_symbol = '[✗](bold red)'
 vimcmd_symbol = '[V](bold green)'
 
@@ -29,7 +45,7 @@ show_always = true
 disabled = true
 
 [aws]
-symbol = " "
+symbol = "  "
 
 [buf]
 symbol = " "
@@ -83,7 +99,7 @@ symbol = " "
 symbol = " "
 
 [gcloud]
-symbol = " "
+symbol = "  "
 
 [git_branch]
 symbol = " "
@@ -110,6 +126,7 @@ symbol = " "
 style = 'bold green'
 ssh_only = true
 ssh_symbol = " "
+
 
 [java]
 symbol = " "
@@ -231,3 +248,4 @@ symbol = " "
 
 [gradle]
 symbol = " "
+```
