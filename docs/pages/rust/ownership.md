@@ -9,16 +9,16 @@ outline: deep
 > [!IMPORTANT]
 >
 > - rust 中每个值在任意时刻都只能有一个所有者
-> - 当所有者超出作用域时, 值将被释放(drop)
+> - 当所有者超出作用域时, rust 会自动调用释放内存函数`drop`(类似其他语言的手动释放内存函数`free`)
 > - 值得所有权可以转移(move), 也可以通过借用(borrow)不获取所有权来临时使用
 
 ## 移动(move)
 
-rust 隐含的设计: **永远不会创建数据的"深层"副本**
+rust 隐含的设计: **永远不会自动创建数据的"深层"副本**(但是可以使用 `clone()` 手动深拷贝)
 
 ```rust
 let s1 = String::from("hello");
-let s2 = s1; // move: s1被移动(move)到s2; s1 失效
+let s2 = s1; // move: s1被移动(move)到s2; s1 失效; 并不是拷贝堆上的数据给s2;
 
 // 编译失败: s1 变量失效
 println!("{s1}, world!");
@@ -26,28 +26,93 @@ println!("{s1}, world!");
 
 `let s1 = String::from("hello");`
 
-s1 在堆栈上分配, 由 3 部分组成(ptr,len,cap)
+s1 变量本身在栈上分配, 由 3 部分组成(ptr,len,cap), 这 3 个元数据存储在栈(stack)上, 而不是堆(heap)上, 但指针所指向的数据可能会是分配在堆上.
 
-- ptr: 一个指向(存储字符串内容的)内存的指针.
+- ptr: 一个指向(存储字符串内容的)内存的指针.(当前`String::from("hello")`会被在堆内存上分配)
 - len: 当前实际存储的长度.
 - cap: 底层分配的最大长度.
 
 `let s2 = s1;`
 
 1. 当把 s1 赋值给 s2 时,数据被复制,此处复制的是栈数据(s1 的 ptr,len,cap),而不是复制 ptr 所指向的堆上的数据.
-2. 然后, rust 会使变量 s1 失效(所以这不是浅拷贝,因为 s1 失效),失效也就意味着不需要释放堆上的数据.
+2. 然后, rust 会使变量 s1 失效(所以这不是浅拷贝,因为 s1 失效),失效也就意味着不需要释放堆上的数据(**已经 move 给 s2 了, 所有权在 s2**).
 
 以上过程被称为`移动(move)`
 
 ### copy
 
-简单数据类型实现 `copy trait` , 赋值时是值的复制
+实现了 `copy trait`的类型 , 赋值时是值的复制
+
+比如 rust 中的基本类型(Primitive Types: 整型,浮点,字符,布尔)
+
+复合类型(Compound Types: 元组,数组)中的元素如果都是基本类型, 也会实现 `copy trait`
 
 ```rust
 let s1 = 5;
 let s2 = s1; // copy, 而不是move
 
-println!("{s1}");
+println!("{s1}"); // 可以正常打印s1, 不会编译错误
+```
+
+### clone
+
+集合类型（Collection Types: ` String`,`Vec<T>`,`HashMap<K, V>`,`struct`等）,又称动态复合类型,无法确定大小, 一般分配在堆上(变量本身赋值给另一个变量时的动作会是 `move`)
+
+struct 中的字段类型如果`都是基本类型`, 可以实现 copy 而不 move
+
+```rs
+#[derive(Debug, Clone, Copy)] // copy的实现依赖于clone
+struct MoveCommand {
+    x: i32,
+    y: i32,
+}
+
+fn main() {
+    let mc = MoveCommand { x: 123, y: 123 };
+
+    let mc2 = mc; // copy, 发生值的复制, 和clone的效果一样, 其实就是深拷贝
+
+    println!("mc: {:?}", mc) // 编译通过, mc变量 依然有效
+}
+```
+
+move
+
+```rs
+#[derive(Debug)] // 没有派生 copy trait
+struct MoveCommand {
+    x: i32,
+    y: i32,
+}
+
+fn main() {
+    let mc = MoveCommand { x: 123, y: 123 };
+
+    let mc2 = mc; // [!code highlight] move, 因为没有实现 copy trait, 赋值时发生的是 move 操作
+
+    println!("mc: {:?}", mc) // [!code error] 编译失败, move后 mc 失效
+}
+```
+
+struct 中的字段`不全是基本类型`
+
+```rs
+#[derive(Debug, Clone)] // 派生clone
+struct MoveCommand {
+    x: String,
+    y: i32,
+}
+
+fn main() {
+    let mc = MoveCommand {
+        x: String::from("hello"),
+        y: 123,
+    };
+
+    let mc2 = mc.clone(); // [!code highlight] clone
+
+    println!("mc: {:?}", mc) // 编译通过, 因为是clone, 所有权没有转移
+}
 ```
 
 ## 作用域和赋值
