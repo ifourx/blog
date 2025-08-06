@@ -102,7 +102,8 @@ function sidebarRust(): DefaultTheme.SidebarItem[] {
         { text: '智能指针', link: '/pages/rust/smart_pointer' },
         { text: '无畏并发', link: '/pages/rust/fearless_concurrency' },
         { text: '模式与匹配', link: '/pages/rust/match' },
-        { text: '枚举与结构体', link: '/pages/rust/struct_enum' }
+        { text: '枚举与结构体', link: '/pages/rust/struct_enum' },
+        { text: '泛型', link: '/pages/rust/generic' }
       ]
     }
   ]

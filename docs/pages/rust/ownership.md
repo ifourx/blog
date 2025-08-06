@@ -56,7 +56,7 @@ println!("{s1}"); // 可以正常打印s1, 不会编译错误
 
 ### clone
 
-集合类型（Collection Types: ` String`,`Vec<T>`,`HashMap<K, V>`,`struct`等）,又称动态复合类型,无法确定大小, 一般分配在堆上(变量本身赋值给另一个变量时的动作会是 `move`)
+集合类型（Collection Types: ` String`,`Vec<T>`,`HashMap<K, V>`,`struct`等）,又称动态复合类型,无法确定大小, 一般分配在堆上(变量本身赋值给另一个变量时的动作会是 `move`;函数调用不传引用也会 `move`)
 
 struct 中的字段类型如果`都是基本类型`, 可以实现 copy 而不 move
 
@@ -77,8 +77,9 @@ fn main() {
 ```
 
 move
+::: code-group
 
-```rs
+```rs [move1]
 #[derive(Debug)] // 没有派生 copy trait
 struct MoveCommand {
     x: i32,
@@ -93,6 +94,27 @@ fn main() {
     println!("mc: {:?}", mc) // [!code error] 编译失败, move后 mc 失效
 }
 ```
+
+```rs [move2]
+#[derive(Debug)] // 没有派生 copy trait
+struct MoveCommand {
+    x: i32,
+    y: i32,
+}
+fn foo(mc: MoveCommand) {
+    println!("x is {}", mc.x)
+}
+
+fn main() {
+    let ix = MoveCommand { x: 456, y: 456 };
+
+    foo(ix); // [!code highlight] `MoveCommand`没有派生copy trait, 是move, 不是复制
+
+    println!("ix: {:?}", ix) // [!code error] 编译失败, ix被移动到函数, ix变量本身已经失效(foo调用结束,ix被drop)
+}
+```
+
+:::
 
 struct 中的字段`不全是基本类型`
 
@@ -132,13 +154,53 @@ println!("{s}, world!");
 
 > [!IMPORTANT]
 >
-> - 在任意时间，要么有多个不可变引用 (&T)，要么只能有一个可变引用 (&mut T)。(避免 double free; 避免数据竞争;)
+> - 在同一时间，要么有多个不可变引用 (&T)，要么只能有一个可变引用 (&mut T)。(避免 double free; 避免数据竞争;)
+
+### 引用和解引用
 
 引用（&T, &mut T）本身是简单的指针，大小固定，本质是简单类型，但所引用的数据可能是复杂类型。
 
+访问引用的数据需要先解引用, 但 rust 一般会自动解引用, 解引用使用`*`
+::: code-group
+
+```rs [sample1]
+fn main() {
+    // 创建对动态数组vec的引用
+    let v = &vec![10; 40];
+
+    // rust自动解引用, 其实就是 let x = (*v)[3];
+    let x = v[3];
+    println!("x: {:?}", x)
+}
+```
+
+```rs [sample2]
+fn largest<T>(list: &[T]) -> &T
+where
+    T: PartialOrd,
+{
+    // 访问引用类型中的数据需要先解引用, 因为函数返回值类型是 `&T`, 所以我们先解引用,然后取得下标0的元素, 然后再引用.
+    let mut max_value = &((*list)[0]);
+
+    // 一般写法, rust自动解引用, list[0]其实是 (*list)[0];
+    // 因为返回值类型是&T, 解引用后取得值后需要再使用"&"引用
+    let mut max_value2 = &list[0];
+
+
+    for item in &(*list) {
+        if item > max_value {
+            max_value = item;
+        }
+    }
+    max_value
+}
+```
+
+:::
+
 问: 既然引用是简单类型,所以可以多个(&T),但为什么不能多个(&mut T),
 
-答: 因为 rust 就是这么设计的, 用来防止数据竞争. **“在任意时间，要么有多个不可变引用 (&T)，要么只能有一个可变引用 (&mut T)。”**
+答: 因为 rust 就是这么设计的, 用来防止数据竞争. **“在同一时间，要么有多个不可变引用 (&T)，要么只能有一个可变引用 (&mut T)。”**
 
 ### 可变引用
 
@@ -156,19 +218,65 @@ println!("{s}, world!");
 
 以下代码正常通过编译, 如果没有 NLL, 代码会因为借用冲突无法编译. 有了 NLL, 有效减少了编译报错: "同时存在可变,不可变借用"
 
-```rs
+::: code-group
+
+```rs [2018 √]
 fn main() {
     let mut s = String::from("hello");
 
     let r1 = &s; // no problem
     let r2 = &s; // no problem
 
-    // NLL的启用使得在r3创建前 r1,r2 drop; 之后无法再使用已经drop的变量: r1, r2
     let r3 = &mut s; // no problem
-    println!("{r3}");
+
+    println!("{r3}"); // 编译通过
 }
 ```
 
-## 切片类型
+```rs [2018 ×]
+fn main() {
+    let mut s = String::from("hello");
 
-让你引用一个 集合 中连续的元素序列。切片是一种引用，因此它没有所有权。
+    let r1 = &s; // no problem
+    let r2 = &s; // no problem
+    // 编译失败: 后面需要用到不可变引用r1,r2; 此处又创建了可变引用
+    // 编译器不允许同时存在(防止读取数据被修改,避免数据竞争,保证数据一致性)
+    let r3 = &mut s; // [!code error]
+
+    println!("{}, {}, and {}", r1, r2, r3);
+}
+```
+
+:::
+
+## 切片(slice)
+
+切片是一种引用类型，因此它没有所有权。让你引用一个集合或数组中连续的元素序列。
+::: code-group
+
+```rs [array]
+fn main() {
+    // 使用不可变数组创建不可变切片
+    let arr = [10; 6];
+    let slice = &arr;
+    let slice2 = &arr[1..4];
+
+    // 使用可变数组创建可变切片
+    // 可变数组: 可变指的是数组内元素可变, 数组长度在编译时固定(不可变),
+    // 数组存储在栈内存上
+    let mut arr2 = [10; 6];
+    let slice_mut1 = &mut arr2;
+    slice_mut1[0] = 99;
+    println!("{:?}", arr2);
+}
+```
+
+```rs [vec]
+fn main() {
+    // 使用动态数组vec(集合类型)创建切片
+    let v = vec![10; 6];
+    let slice_vec = &v[1..4];
+}
+```
+
+:::

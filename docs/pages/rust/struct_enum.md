@@ -47,7 +47,7 @@ enum Result<T, E> {
 }
 ```
 
-### samples
+### examples
 
 ```rs
 pub mod mjdemo {
