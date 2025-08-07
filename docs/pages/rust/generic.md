@@ -11,6 +11,7 @@ outline: deep
 - `&T`: 函数返回一个对类型为`T`的引用
 
 ```rs
+// list是切片(slice)的引用, 不是数组, 数组使用 `list: &[T; N]`
 fn largest<T>(list: &[T]) -> &T
 where
     T: PartialOrd,

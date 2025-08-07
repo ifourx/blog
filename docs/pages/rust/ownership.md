@@ -22,6 +22,9 @@ let s2 = s1; // move: s1被移动(move)到s2; s1 失效; 并不是拷贝堆上�
 
 // 编译失败: s1 变量失效
 println!("{s1}, world!");
+
+// 下面的所有权属于语句本身
+String::from("world!") // 没有变量绑定, 语句结束后没有变量持有, 堆内存会被回收
 ```
 
 `let s1 = String::from("hello");`
