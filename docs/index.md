@@ -70,6 +70,7 @@ features:
 
 ## Latest Blog Posts
 
+- [[Rust] 生命周期](/pages/rust/generic)
 - [[Rust] 所有权机制](/pages/rust/ownership)
 - [[Linux] VPS 安全指北](/pages/linux/vps_reload)
 - [[Linux] H-UI 面板](/pages/linux/hui)
