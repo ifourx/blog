@@ -56,9 +56,9 @@ rustup self uninstall
 
 ### `cargo.toml`
 
-当出现 panic 时, 程序默认会开始**展开**(unwinding),
-**终止**(abort): 不清理数据直接退出程序, 所使用的内存由操作系统清理.
-设置在 release 模式中 panic 时直接种植:
+当出现 panic 时, 程序默认会开始**栈展开**(unwinding): 回溯栈上数据和函数调用,更多的报错信息和善后处理.
+**终止**(abort): 不清理数据直接退出程序, 所使用的内存由操作系统清理.适用 abort 模式, 编译后的文件更小
+设置在 release 模式中 panic 时直接终止:
 
 ```toml
 [profile.release]
