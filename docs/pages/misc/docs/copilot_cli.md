@@ -103,23 +103,6 @@ generate standup reports, get personalized tips, and receive suggestions for imp
 
 [Take flight with GitHub Copilot](https://learn.github.com/skills#take-flight-with-github-copilot)
 
-## Global shortcuts
-
-```text
- @             mention files, include contents in context
- Esc           cancel the current operation
- !             execute command in your local shell (bypass Copilot)
- ctrl+c        cancel operation / clear input / exit
- ctrl+d        shutdown
- ctrl+l        clear the screen, 不影响context
- shift+tab     switch between plan mode and regular interactive mode
- ctrl+y        预览plan mode下生成的plan.md,可以编辑此文件添加更多细节
- ctrl+o        在terminal中展开所有时间线,当terminal中没内容时等同于 ctrl+e
-```
-
-double Esc keypress: Rewind to a previous point
-If there's text in the input area, pressing Esc twice in quick succession clears the text. `/undo` `rewind`
-
 ## Tips
 
 Run shell commands
@@ -243,9 +226,28 @@ Github Copilot [CLI plugin reference](https://docs.github.com/en/copilot/referen
 
 ## Copilot CLI reference
 
-### [GitHub Copilot CLI command reference](https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-command-reference)
+Find commands and keyboard shortcuts to help you use Copilot CLI effectively.
 
-> Find commands and keyboard shortcuts to help you use Copilot CLI effectively.
+### Command
+
+[GitHub Copilot CLI command reference](https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-command-reference)
+
+### Keyboard Shortcuts
+
+```text
+ @             mention files, include contents in context
+ Esc           cancel the current operation
+ !             execute command in your local shell (bypass Copilot)
+ ctrl+c        cancel operation / clear input / exit
+ ctrl+d        shutdown
+ ctrl+l        clear the screen, 不影响context
+ shift+tab     switch between plan mode and regular interactive mode
+ ctrl+y        预览plan mode下生成的plan.md,可以编辑此文件添加更多细节
+ ctrl+o        在terminal中展开所有时间线,当terminal中没内容时等同于 ctrl+e
+```
+
+double Esc keypress: Rewind to a previous point
+If there's text in the input area, pressing Esc twice in quick succession clears the text. `/undo` `rewind`
 
 `/session`
 
