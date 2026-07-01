@@ -170,13 +170,6 @@ ufw disable
 
 ```
 
-## 部署 docker
-
-官方文档: [Install Docker Engine on Ubuntu](https://docs.docker.com/engine/install/ubuntu/)
-
-> [!tip]
-> 授权非 root 用户使用 docker 命令 [Manage Docker as a non-root user](https://docs.docker.com/engine/install/linux-postinstall/)
-
 ## Misc.
 
 ### vps 评测脚本

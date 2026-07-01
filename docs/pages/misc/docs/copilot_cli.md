@@ -4,6 +4,20 @@ layout: doc
 
 # Copilot CLI
 
+GitHub Copilot CLI is a **standalone terminal application** that brings the power of GitHub Copilot directly to your command line.
+
+> ![Static Badge](https://img.shields.io/badge/Terminal-text?logo=gnometerminal&labelColor=0969da&color=ddf4ff)
+>
+> ```sh
+> copilot update
+>
+> copilot --allow-all --enable-all-github-mcp-tools
+> ```
+
+The `--enable-all-github-mcp-tools` flag enables all GitHub MCP (Model Context Protocol) tools, giving Copilot CLI access to GitHub features like creating issues, managing repositories, and more.
+
+Depending on your Copilot CLI configuration (for example, if you don't use the `--allow-all` option), you may be prompted to enable certain features during the session. Respond yes to these prompts as well.
+
 ## Customize your environment
 
 **Supported locations (in order of discovery):**
@@ -30,12 +44,13 @@ Run `copilot help providers` for full setup instructions.
 This allows the CLI to access any file path, use any tool, and access any URL without prompting for confirmation.
 Use with caution, as it grants the CLI full access and automation capabilities.
 
-## 1233
+## 123
 
-> ![Static Badge](https://img.shields.io/badge/Terminal-text?logo=gnometerminal&labelColor=0969da&color=ddf4ff)
+> ![Static Badge](https://img.shields.io/badge/GitHub%20Copilot-Prompt-text?style=flat-square&logo=githubcopilot&labelColor=8250df&color=fbefff)
 >
-> ```
-> copilot --allow-all --enable-all-github-mcp-tools
+> ```text
+> /theme
+> /skills
 > ```
 
 ## plan mode
@@ -232,6 +247,10 @@ Find commands and keyboard shortcuts to help you use Copilot CLI effectively.
 
 [GitHub Copilot CLI command reference](https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-command-reference)
 
+vscode的chat中使用`#codebase`作用: 这次的prompt请优先基于整个代码库来理解和回答.
+
+`copilot init`或者`/init`作用: 分析整个codebase, 生成或更新当前仓库下的`.github/copilot-instructions.md`文件.
+
 ### Keyboard Shortcuts
 
 ```text
@@ -250,14 +269,6 @@ double Esc keypress: Rewind to a previous point
 If there's text in the input area, pressing Esc twice in quick succession clears the text. `/undo` `rewind`
 
 `/session`
-
-## Agent Package Manager
-
-docs: [Agent Package Manager](https://github.com/microsoft/apm)
-
-## agentrc
-
-github: [agentrc](https://github.com/microsoft/agentrc)
 
 ## prompt
 

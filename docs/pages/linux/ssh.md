@@ -41,11 +41,12 @@ Host *
     ServerAliveInterval 60
     ServerAliveCountMax 3
 
-Host githubifourx
+Host githubifourx github.com
     User git
     Hostname github.com
     Port 22
     IdentityFile ~/.ssh/i4x_ed25519
+    <!-- ProxyCommand nc -X connect -x 127.0.0.1:7890 %h %p -->
 
 Host gitlab
     User git
