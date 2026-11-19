@@ -2,7 +2,9 @@
 
 [MCP (Model Context Protocol)](https://modelcontextprotocol.io/docs/getting-started/intro) is an open-source standard for connecting AI applications to external systems.
 
-Connect models to the real world: [MCP Registry](https://github.com/mcp/)
+For installation instructions, available tools, and URLs for specific MCP servers, see the GitHub [MCP Registry](https://github.com/mcp/).
+
+For more information, see [Adding MCP servers for GitHub Copilot CLI](https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/add-mcp-servers).
 
 ## with GitHub Copilot
 
@@ -35,3 +37,7 @@ In the `.vscode/mcp.json` file, click the **Start** button and accept the prompt
 > 2.  Make the changes then confirm with me that they look correct.
 > 3.  Push the changes and create a pull request.
 > ```
+
+## MCP servers
+
+[Context7 Platform](https://github.com/upstash/context7) - Up-to-date Code Docs For Any Prompt

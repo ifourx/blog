@@ -11,11 +11,20 @@ Typically include:
 - Team-specific preferences and style guides
 - Language-specific review criteria
 
+Project initialization for Copilot:
+use `copilot init`, or `/init`, when you start a new project, or when you start using Copilot CLI in an existing repository.
+
+Priority: Personal instructions > Repository instructions > Organization instructions
+
+For more information, see [Adding custom instructions for GitHub Copilot CLI](https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/add-custom-instructions).
+
 ## Examples
 
 ### Repository-wide instructions
 
 Applies to all code in the repository.
+
+定义代码与项目规范 (技术栈、架构、全局代码风格等)
 
 Ex: `.github/copilot-instructions.md`
 
@@ -62,7 +71,9 @@ Ex: `.github/copilot-instructions.md`
 
 Applies to specific files to create focused criteria for different parts of your codebase.
 
-Ex: `.github/instructions/NAME.instructions.md`
+对指定的文件类型或目录补充专属逻辑 (通过`applyTo`关键字指定)
+
+Ex: `.github/instructions/**/*.instructions.md`
 
 ```md
 ---

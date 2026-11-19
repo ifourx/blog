@@ -147,8 +147,9 @@ function sidebarMisc(): DefaultTheme.SidebarItem[] | undefined {
       items: [
         { text: "Copilot", link: "/pages/misc/docs/copilot" },
         { text: "Copilot CLI", link: "/pages/misc/docs/copilot_cli" },
-        { text: "Agents.md", link: "/pages/misc/docs/agents" },
         { text: "Instructions.md", link: "/pages/misc/docs/instructions" },
+        { text: "AGENTS.md", link: "/pages/misc/docs/AGENTS" },
+        { text: "SKILL.md", link: "/pages/misc/docs/SKILL" },
         { text: "MCP", link: "/pages/misc/docs/mcp" },
         { text: "Openclaw", link: "/pages/misc/docs/openclaw" },
       ],
